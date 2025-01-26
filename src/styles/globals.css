@@ -1,0 +1,268 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Styles */
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply m-0 min-h-screen scroll-smooth bg-primary p-0 leading-5 text-secondary-content;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  @apply text-success underline hover:text-accent-content;
+}
+
+/* Layout Styles */
+main {
+  @apply z-10 m-0 mx-auto grid h-auto w-screen grid-cols-1 gap-4 p-0 align-middle md:fixed md:h-screen md:gap-8 md:overflow-x-hidden;
+}
+
+/* Section Layout */
+section {
+  @apply mx-auto flex min-h-screen items-center justify-center p-0 py-1 md:max-w-4xl lg:max-w-5xl xl:max-w-7xl;
+}
+
+header {
+  @apply relative m-0 h-auto w-full p-0;
+}
+
+/* Image Hover Effects */
+img {
+  @apply opacity-0 transition-all duration-500 ease-in-out hover:shadow-2xl;
+}
+
+/* Navigation */
+nav {
+  @apply relative bg-transparent;
+}
+
+nav a {
+  @apply leading-7 no-underline;
+}
+
+.main-nav {
+  @apply fixed top-5 z-50 mx-auto flex h-10 items-center justify-between bg-white shadow-lg;
+  width: calc(100% - 1.5rem);
+}
+
+.social-media-nav {
+  @apply right-5 m-0 flex h-auto w-full items-center justify-center space-x-1 p-0 md:justify-start md:space-x-2;
+}
+
+.social-media-nav .social-media-icon {
+  @apply mx-1 md:mx-2;
+}
+
+.soacial-media-nav a {
+  @apply tooltip tooltip-top;
+}
+
+/* Apply the font to heading tags */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold text-base-300;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+h1 {
+  @apply mb-4 text-4xl md:text-5xl lg:text-6xl;
+}
+
+h2 {
+  @apply mb-3 text-2xl text-success;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+h4 {
+  @apply text-lg;
+}
+
+h5 {
+  @apply text-base;
+}
+
+ul {
+  @apply list-disc pl-3;
+}
+
+ul li {
+  @apply leading-6;
+}
+
+hr {
+  @apply my-2 w-full border-primary-content;
+}
+
+/* Initial Border Styling Using Tailwind */
+div[class^='border-'] {
+  @apply fixed z-40 hidden h-3 w-3 bg-success opacity-0 md:block;
+}
+
+.border-top {
+  @apply left-0 top-0;
+}
+
+.border-right {
+  @apply right-0 top-0;
+}
+
+.border-bottom {
+  @apply bottom-0 right-0;
+}
+
+.border-left {
+  @apply bottom-0 left-0;
+}
+
+.h-border {
+  @apply h-3 w-[10vw] sm:w-[5vw] md:w-[10vw] lg:w-[15vw];
+}
+
+.v-border {
+  @apply h-[10vh] w-3 sm:h-[5vh] md:h-[10vh] lg:h-[15vh];
+}
+
+/* Final state after the animation */
+.end-border {
+  @apply transition-all duration-300 ease-in;
+}
+
+.end-border.h-border {
+  @apply h-5;
+}
+
+.end-border.v-border {
+  @apply w-5;
+}
+
+/* Keyframe for fading in */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply animation to the button */
+.popover-button {
+  @apply btn btn-square btn-ghost fixed left-3 top-3 z-40 m-0 inline-flex items-center gap-x-1 p-0 text-neutral opacity-0 focus:outline-none md:left-5 md:top-5;
+  animation: fadeIn 1.5s ease-out 1.5s 1 forwards;
+}
+
+.popover-button-close {
+  @apply fixed left-3 top-3 z-50 m-0 inline-flex items-center gap-x-1 p-0 text-neutral opacity-100 focus:outline-none md:left-11 md:top-11;
+}
+
+.social-media-icon {
+  @apply mx-1 mt-1 transition-all ease-in-out hover:opacity-75 hover:shadow-2xl md:mx-2 lg:mx-4;
+}
+
+.signature-wrapper {
+  @apply z-30 hidden w-full opacity-0 lg:block;
+}
+
+.signature-link {
+  @apply block h-auto w-28;
+}
+
+.summary-grid {
+  @apply grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2;
+}
+
+.animate-images {
+  @apply animate-image-perspective;
+}
+
+.profile-image-container {
+  @apply relative block h-auto w-full duration-300 ease-in md:aspect-square md:h-full;
+}
+
+.profile-image {
+  @apply bg-profile-gradient relative mx-auto block aspect-square rounded-full bg-success shadow-sm md:h-full md:w-full md:object-cover;
+}
+
+.background-container {
+  position: relative;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.circle {
+  @apply mask-circle fixed h-full w-full overflow-hidden text-center align-middle;
+}
+
+.circle-one {
+  @apply z-1 bottom-0 left-0 h-1/6;
+  background-color: #f5f2e9;
+  z-index: 9;
+}
+
+.circle-two {
+  @apply z-2 bottom-4 left-4 h-1/3;
+  background-color: #faf7ec;
+  z-index: 8;
+}
+
+.circle-three {
+  @apply z-3 bottom-7 left-7 h-1/2;
+  background-color: #faf6e7;
+  z-index: 7;
+}
+
+.circle-four {
+  @apply z-4 bottom-11 left-11 h-2/3;
+  background-color: #f9f4e1;
+  z-index: 6;
+}
+
+.circle-five {
+  @apply bottom-14 left-14 h-3/4;
+  background-color: #f5efd9;
+  z-index: 5;
+}
+
+.circle-six {
+  @apply bottom-16 left-16;
+  background-color: #f0e9d1;
+  z-index: 4;
+}
+
+.circle-seven {
+  @apply bottom-20 left-20;
+  background-color: #eae3c9;
+  z-index: 3;
+}
+
+.circle-eight {
+  @apply bottom-24 left-24;
+  background-color: #e4ddc1;
+  z-index: 2;
+}
+
+.circle-nine {
+  @apply bottom-28 left-28;
+  z-index: 1;
+  background-color: #ded7b9;
+}

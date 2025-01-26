@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Solar System</title>
+    <style>
+      body {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .solar-system {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Stars */
+      .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0;
+        animation: blink 1s infinite alternate;
+        z-index: 1;
+      }
+
+      /* Randomizing the stars */
+      .star:nth-child(odd) {
+        animation: blink 1.5s infinite alternate;
+      }
+      .star:nth-child(even) {
+        animation: blink 2s infinite alternate;
+      }
+
+      /* Blinking stars animation */
+      @keyframes blink {
+        0% {
+          opacity: 0.1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Sun */
+      .sun {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: yellow;
+        box-shadow: 0 0 100px 30px rgba(255, 255, 0, 0.8); /* Initial glowing effect */
+        z-index: 10;
+        animation: pulseGlow 6s ease-in-out infinite; /* Add pulsing animation */
+      }
+
+      /* Pulsing glow effect for the sun */
+      @keyframes pulseGlow {
+        0% {
+          box-shadow: 0 0 40px 10px rgba(255, 255, 0, 0.8); /* Normal glow */
+        }
+        50% {
+          box-shadow: 0 0 800px 35px rgba(255, 255, 0, 1); /* Increased glow */
+        }
+        100% {
+          box-shadow: 0 0 40px 10px rgba(255, 255, 0, 0.8); /* Normal glow */
+        }
+      }
+
+      .planet {
+        position: absolute;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+
+      /* Planet sizes and colors */
+      .mercury {
+        width: 25px;
+        height: 25px;
+        background-color: grey;
+        background-image: radial-gradient(circle, #666, #333);
+        animation: orbit-mercury 8s linear infinite;
+        z-index: 9;
+      }
+
+      .venus {
+        width: 30px;
+        height: 30px;
+        background-color: #b87333; /* Golden brown */
+        background-image: radial-gradient(circle, #f1c27d, #9e7c5b);
+        animation: orbit-venus 12s linear infinite;
+        z-index: 8;
+      }
+
+      .earth {
+        width: 35px;
+        height: 35px;
+        background-color: blue;
+        background-image: radial-gradient(circle, #1e6ab0, #0d3b73);
+        animation: orbit-earth 16s linear infinite;
+        z-index: 7;
+      }
+
+      .mars {
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        background-image: radial-gradient(circle, #b24b4b, #8b2d2d);
+        animation: orbit-mars 20s linear infinite;
+        z-index: 6;
+      }
+
+      .jupiter {
+        width: 110px;
+        height: 110px;
+        background-color: #d2b48c; /* Yellow/Brown */
+        background-image: radial-gradient(circle, #f2d09a, #b68e5b);
+        animation: orbit-jupiter 24s linear infinite;
+        z-index: 5;
+      }
+
+      .saturn {
+        position: relative; /* Needed to position the rings properly */
+        width: 90px;
+        height: 90px;
+        background-color: #f0e68c; /* Yellow/Brown */
+        background-image: radial-gradient(circle, #fff4b3, #d2b450);
+        animation: orbit-saturn 28s linear infinite;
+        z-index: 4;
+      }
+
+      .saturn {
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        background-color: #f0e68c; /* Yellow/Brown */
+        background-image: radial-gradient(
+          circle,
+          #fff4b3,
+          #d2b450
+        ); /* Subtle gradient */
+        animation: orbit-saturn 28s linear infinite;
+        transform-origin: center;
+        z-index: 2;
+      }
+
+      /* Saturn rings */
+      .saturn-ring {
+        position: absolute;
+        width: 300px; /* Larger size for the ring */
+        height: 80px; /* Adjust the thickness of the ring */
+        border-radius: 50%; /* Round rings */
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0)
+        ); /* Transparent rings with a gradient */
+        z-index: 1;
+        top: 50%; /* Center the ring around Saturn */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Position the ring correctly */
+        animation: rotateRing 40s linear infinite; /* Rotate the rings around Saturn */
+      }
+
+      .neptune {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        background-image: radial-gradient(circle, #3a82d5, #1c3e8d);
+        animation: orbit-neptune 36s linear infinite;
+        z-index: 2;
+      }
+
+      /* Labels */
+      .planet-label {
+        position: absolute;
+        color: white;
+        font-size: 14px;
+        text-align: right;
+        z-index: 10;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease;
+      }
+
+      /* Show the label when the planet is hovered */
+      .planet:hover .planet-label {
+        opacity: 1;
+      }
+
+      /* Keyframes for planet orbits */
+      @keyframes orbit-mercury {
+        0% {
+          transform: rotate(0deg) translateX(200px) translateY(60px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(200px) translateY(60px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-venus {
+        0% {
+          transform: rotate(0deg) translateX(250px) translateY(80px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(250px) translateY(80px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-earth {
+        0% {
+          transform: rotate(0deg) translateX(300px) translateY(100px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(300px) translateY(100px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-mars {
+        0% {
+          transform: rotate(0deg) translateX(350px) translateY(120px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(350px) translateY(120px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-jupiter {
+        0% {
+          transform: rotate(0deg) translateX(450px) translateY(150px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(450px) translateY(150px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-saturn {
+        0% {
+          transform: rotate(0deg) translateX(500px) translateY(160px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(500px) translateY(160px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-uranus {
+        0% {
+          transform: rotate(0deg) translateX(600px) translateY(200px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(600px) translateY(200px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit-neptune {
+        0% {
+          transform: rotate(0deg) translateX(650px) translateY(220px)
+            rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(650px) translateY(220px)
+            rotate(-360deg);
+        }
+      }
+
+      @keyframes rotateRing {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="solar-system">
+      <div class="stars"></div>
+      <div class="sun"></div>
+      <div class="planet mercury">
+        <div class="planet-label">Mercury</div>
+      </div>
+      <div class="planet venus">
+        <div class="planet-label">Venus</div>
+      </div>
+      <div class="planet earth">
+        <div class="planet-label">Earth</div>
+      </div>
+      <div class="planet mars">
+        <div class="planet-label">Mars</div>
+      </div>
+      <div class="planet jupiter">
+        <div class="planet-label">Jupiter</div>
+      </div>
+      <div class="planet saturn">
+        <div class="planet-label">Saturn</div>
+        <div class="saturn-rings"></div>
+      </div>
+      <div class="planet uranus">
+        <div class="planet-label">Uranus</div>
+      </div>
+      <div class="planet neptune">
+        <div class="planet-label">Neptune</div>
+      </div>
+    </div>
+    <script>
+      // Create a random number of stars
+      const starContainer = document.querySelector('.stars');
+      const starCount = 100; // Number of stars
+
+      // Function to generate random stars
+      function generateStars() {
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement('div');
+          star.classList.add('star');
+
+          // Random position
+          const xPos = Math.random() * 100 + 'vw'; // Random horizontal position
+          const yPos = Math.random() * 100 + 'vh'; // Random vertical position
+          star.style.left = xPos;
+          star.style.top = yPos;
+
+          // Random size
+          const size = Math.random() * 3 + 1 + 'px'; // Random size between 1px and 3px
+          star.style.width = size;
+          star.style.height = size;
+
+          // Random blink speed
+          const blinkSpeed = Math.random() * 1 + 1 + 's'; // Random blinking time
+          star.style.animationDuration = blinkSpeed;
+
+          // Append to the container
+          starContainer.appendChild(star);
+        }
+      }
+
+      // Call the function to generate stars
+      generateStars();
+    </script>
+  </body>
+</html>
